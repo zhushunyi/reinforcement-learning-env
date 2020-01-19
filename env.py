@@ -129,6 +129,29 @@ class water_pump(gym.Env):
             next_state = int(str, 2)
             return next_state
 
+    def ActionSelection(self, state):
+        for i in self.actions:
+            action_set.append(bin(i)[2:])
+        # eliminate the actions that cannot be chosen
+        ac_1 = ['0', '1', '2']
+        ac_2 = ['0', '1', '2']
+        ac_3 = ['0', '1', '2']
+        if state[0] == '0':
+            ac_1.remove('2')
+        if state[0] == '1':
+            ac_1.remove('1')
+        if state[1] == '0':
+            ac_2.remove('2')
+        if state[1] == '1':
+            ac_2.remove('1')
+        if state[2] == '0':
+            ac_3.remove('2')
+        if state[2] == '1':
+            ac_3.remove('1')
+        index = np.random.randint(0,2,size = 3)
+        action = ac_1[index[0]] + ac_2[index[1]] + ac_3[index[2]]
+        return action
+
     def _step(self, action):
         # current state
         state = self.state
