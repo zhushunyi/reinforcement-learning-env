@@ -130,8 +130,9 @@ class water_pump(gym.Env):
             return next_state
 
     def ActionSelection(self, state):
+        '''action_set = []
         for i in self.actions:
-            action_set.append(bin(i)[2:])
+            action_set.append(bin(i)[2:])'''
         # eliminate the actions that cannot be chosen
         ac_1 = ['0', '1', '2']
         ac_2 = ['0', '1', '2']
@@ -173,3 +174,7 @@ class water_pump(gym.Env):
             reward = reward + i.get_rewarcd(action)
 
         return next_state, reward, isterminal, {}
+
+    def _reset(self):
+        self.state = 0
+        return self.state
